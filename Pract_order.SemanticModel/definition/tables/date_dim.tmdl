@@ -1,0 +1,71 @@
+table date_dim
+	lineageTag: defd8a8c-f115-4c6e-83e5-e4e022fa6c43
+
+	measure 'Total Revenue'
+		lineageTag: d5518d8b-a31c-4238-9da2-16a8d8a30896
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d09ea06e-7cbb-451d-8f71-1b661612de90
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 462523b5-75e2-4a51-80d2-3a8d3db34b02
+			defaultHierarchy: LocalDateTable_f2d10ded-0b44-4951-9549-3735dec44c79.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c91dca8-dc44-4e43-99c9-8b1bcc583f96
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: ca81a63f-8c36-4ed0-9b2d-6413339265de
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Name
+		dataType: string
+		lineageTag: 1cc54395-a876-45da-88d4-569167220544
+		summarizeBy: none
+		sourceColumn: Month_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: a71efa26-8e1b-4a20-a0d0-9cce251c784f
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition date_dim = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\prade\Downloads\pract_order.xlsx"), null, true),
+				    Sheet2_Sheet = Source{[Item="Sheet2",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet2_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Year", Int64.Type}, {"Month", Int64.Type}, {"Month_Name", type text}, {"Quarter", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

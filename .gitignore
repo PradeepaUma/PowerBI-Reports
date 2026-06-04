@@ -1,0 +1,11 @@
+# Power BI cache files
+.pbi/
+localSettings.json
+*.pbix.bak
+
+# Large binary files (optional - keep pbix out of git)
+*.pbix
+
+# OS files
+.DS_Store
+Thumbs.db

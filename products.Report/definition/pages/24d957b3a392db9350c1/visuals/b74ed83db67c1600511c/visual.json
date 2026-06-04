@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "b74ed83db67c1600511c",
+  "position": {
+    "x": 190.73820331998863,
+    "y": 126.24399068661117,
+    "z": 0,
+    "height": 244.25467763279119,
+    "width": 602.40339034154681,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sample_sales_dataset"
+                    }
+                  },
+                  "Property": "Category"
+                }
+              },
+              "queryRef": "sample_sales_dataset.Category",
+              "nativeQueryRef": "Category",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sample_sales_dataset"
+                        }
+                      },
+                      "Property": "Unit_Price"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(sample_sales_dataset.Unit_Price)",
+              "nativeQueryRef": "Sum of Unit_Price"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "sample_sales_dataset"
+                      }
+                    },
+                    "Property": "Unit_Price"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b2f91f3c2099963aab19",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "sample_sales_dataset"
+              }
+            },
+            "Property": "Category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "65189fdb214788920977",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "sample_sales_dataset"
+                  }
+                },
+                "Property": "Unit_Price"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
